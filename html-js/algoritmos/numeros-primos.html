@@ -82,10 +82,9 @@ https://gitlab.com/alan.lucki
     const ran = (max, min) => Math.round(Math.random() * (max - min) + min);
 </script>
 <script>
-    const imprimir = x => print(txtS, x);
+    const pri = x => print(txtS, x);
     const getNumber = () => txtNumber.value;
-    const generaAleatorio = () => set(txtNumber, ran(1000, 9999));
-    const limpiar = () => clear(txtS);
+    const cle = () => clear(txtS);
     set(txtNumber, 20);
 </script>
 <script>
@@ -142,7 +141,7 @@ https://gitlab.com/alan.lucki
 
     const Procesar = x => {
 
-        limpiar();
+        cle();
         const inicio = new Date();
         n = getNumber();
         let c = 0;
@@ -158,19 +157,19 @@ https://gitlab.com/alan.lucki
             }
             if (val) {
                 c++;
-                imprimir(i);
+                pri(i);
             }
         }
 
-        imprimir("Metodo " + x);
-        imprimir("Cantidad = " + c);
+        pri("Metodo " + x);
+        pri("Cantidad = " + c);
         const fin = new Date();
         const tiempo = fin - inicio;
-        imprimir("Tiempo = " + tiempo);
+        pri("Tiempo = " + tiempo);
 
     };
 
     const botonLimpiar = () => {
-        limpiar();
+        cle();
     };
 </script>
