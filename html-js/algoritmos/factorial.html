@@ -79,7 +79,8 @@ https://gitlab.com/alan.lucki
     set(txtNumber, 20);
 </script>
 <script>
-
+    
+    // algoritmos
     const iterativo = n => {
         let f = 1;
         for (let i = 2; i <= n; i++) f *= i;
@@ -91,6 +92,7 @@ https://gitlab.com/alan.lucki
         return recursivo(n - 1) * n;
     };
 
+    // eventos
     const btnInterativo = () => {
         let numero = getNumber();
         pri(numero + '!= ' + iterativo(numero));
