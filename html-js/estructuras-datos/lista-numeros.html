@@ -1,0 +1,226 @@
+<!--
+
+Autor   : Lucki Alan Fernandez Salcedo
+email   : alan.lucki@gmail.com
+
+https://github.com/alanlucki/
+https://gitlab.com/alan.lucki
+
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        textarea {
+            font-family: Consolas, monaco, monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <br>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h5>Lista de números</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <label class="form-label">Ingrese Número:</label>
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control" id="txtNumber" disabled="disabled">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row mb-1">
+                    <div class="col-10">
+                        <textarea class="form-control" id="txtS" rows="20" disabled="disabled"></textarea>
+                    </div>
+                    <div class="col-2">
+                        <div class="row mb-1">
+                            <button onclick="setEnPila()" class="btn btn-secondary form-control">ingresar al
+                                inicio</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="listar()" class="btn btn-secondary form-control">listar</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="reportar()" class="btn btn-secondary form-control">reportar</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="eliminarInicio()" class="btn btn-secondary form-control">eliminar al
+                                inicio</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="eliminarLista()" class="btn btn-secondary form-control">eliminar
+                                lista</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="setEnCola()" class="btn btn-secondary form-control">ingresar al
+                                final</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="eliminarFinal()" class="btn btn-secondary form-control">eliminar al
+                                final</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="primeroAlFinal()" class="btn btn-secondary form-control">primero al
+                                final</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="ultimoAlInicio()" class="btn btn-secondary form-control">último al
+                                inicio</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="invertirLista()" class="btn btn-secondary form-control">invertir
+                                lista</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                Autor: alan.lucki@gmail.com
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const print = (control, cadena) => control.value = control.value + cadena + '\n';
+    const clear = control => control.value = '';
+    const set = (control, cadena) => control.value = cadena;
+    const log = x => console.log(x);
+    const ran = (max, min) => Math.round(Math.random() * (max - min) + min);
+</script>
+<script>
+    const imprimir = x => print(txtS, x);
+    const getNumber = () => txtNumber.value;
+    const generaAleatorio = () => set(txtNumber, ran(1000, 9999));
+</script>
+<script>
+    class Nodo {
+        constructor(numero) {
+            this.numero = numero;
+            this.sig = null;
+        }
+        getNumero = () => this.numero;
+    }
+
+    let ls = null;
+
+    const setEnPila = () => {
+        let n = new Nodo(getNumber());
+        n.sig = ls;
+        ls = n;
+        listar();
+    };
+    const setEnCola = () => {
+        let n = new Nodo(getNumber());
+        if (ls === null)
+            ls = n;
+        else {
+            let aux = ls;
+            while (aux.sig !== null) {
+                aux = aux.sig;
+            }
+            aux.sig = n;
+        }
+        listar();
+    };
+
+    const listar = () => {
+        clear(txtS);
+        if (ls === null)
+            imprimir("la lista está vacía...");
+        else {
+            let aux = ls;
+            let i = 0;
+            imprimir("\taux");
+            while (aux !== null) {
+                i++;
+                imprimir(i + ")\t" + aux.getNumero());
+                aux = aux.sig;
+            }
+        }
+        generaAleatorio();
+    };
+    const reportar = () => {
+        log('reportar()');
+    };
+    const eliminarInicio = () => {
+        if (ls !== null)
+            ls = ls.sig;
+        listar();
+    };
+    const eliminarLista = () => {
+        ls = null;
+        listar();
+    };
+    const eliminarFinal = () => {
+        if (ls !== null) {
+            if (ls.sig === null)
+                ls = null;
+            else {
+                let aux = ls;
+                while (aux.sig.sig !== null) {
+                    aux = aux.sig;
+                }
+                aux.sig = null;
+            }
+        }
+        listar();
+    };
+    const primeroAlFinal = () => {
+        if (ls !== null && ls.sig !== null) {
+            let temp = ls;
+            ls = ls.sig;
+            temp.sig = null;
+            let aux = ls;
+            while (aux.sig !== null) {
+                aux = aux.sig;
+            }
+            aux.sig = temp;
+        }
+        listar();
+    };
+    const ultimoAlInicio = () => {
+        if (ls !== null && ls.sig !== null) {
+            let aux = ls;
+            while (aux.sig.sig !== null) {
+                aux = aux.sig;
+            }
+            let temp = aux.sig;
+            aux.sig = null;
+            temp.sig = ls;
+            ls = temp;
+        }
+        listar();
+    };
+    const invertirLista = () => {
+        if (ls !== null && ls.sig !== null) {
+            let aux = ls;
+            while (aux !== null) {
+                aux = aux.sig;
+            }
+        }
+        listar();
+    };
+
+    generaAleatorio();
+    setEnPila();
+    setEnPila();
+    setEnPila();
+</script>

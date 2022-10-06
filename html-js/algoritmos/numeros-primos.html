@@ -1,0 +1,180 @@
+<!--
+
+Autor   : Lucki Alan Fernandez Salcedo
+email   : alan.lucki@gmail.com
+
+https://github.com/alanlucki/
+https://gitlab.com/alan.lucki
+
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Números Primos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<style>
+    textarea {
+        font-family: Consolas, monaco, monospace;
+    }
+</style>
+
+<body>
+    <br>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h5>Números Primos</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <label class="form-label">Ingrese Número:</label>
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control" id="txtNumber">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row mb-1">
+                    <div class="col-10">
+                        <textarea class="form-control" id="txtS" rows="20" disabled="disabled"></textarea>
+                    </div>
+                    <div class="col-2">
+
+                        <div class="row mb-1">
+                            <button onclick="Procesar(1)" class="btn btn-secondary form-control">Metodo-01</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="Procesar(2)" class="btn btn-secondary form-control">Metodo-02</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="Procesar(3)" class="btn btn-secondary form-control">Metodo-03</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="Procesar(4)" class="btn btn-secondary form-control">Metodo-04</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="Procesar(5)" class="btn btn-secondary form-control">Metodo-05</button>
+                        </div>
+
+                        <div class="row mb-1">
+                            <button onclick="botonLimpiar()" class="btn btn-secondary form-control">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                Autor: alan.lucki@gmail.com
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const print = (control, cadena) => control.value = control.value + cadena + '\n';
+    const clear = control => control.value = '';
+    const set = (control, cadena) => control.value = cadena;
+    const log = x => console.log(x);
+    const ran = (max, min) => Math.round(Math.random() * (max - min) + min);
+</script>
+<script>
+    const imprimir = x => print(txtS, x);
+    const getNumber = () => txtNumber.value;
+    const generaAleatorio = () => set(txtNumber, ran(1000, 9999));
+    const limpiar = () => clear(txtS);
+    set(txtNumber, 20);
+</script>
+<script>
+
+    const Metodo01 = n => {
+        let c = 0;
+        for (let i = 1; i <= n; i++)
+            if (n % i === 0) c++;
+        return c == 2;
+    };
+    const Metodo02 = n => {
+        if (n == 1) return false;
+        if (n == 2) return true;
+        if (n % 2 == 0) return false;
+        for (let i = 3; i <= n - 1; i++)
+            if (n % i == 0) return false;
+        return true;
+    };
+    const Metodo03 = n => {
+        if (n == 1) return false;
+        if (n == 2) return true;
+        if (n % 2 == 0) return false;
+        for (let i = 3; i <= n - 1; i = i + 2)
+            if (n % i == 0) return false;
+        return true;
+    };
+    const Metodo04 = n => {
+        if (n == 1) return false;
+        if (n == 2) return true;
+        if (n % 2 == 0) return false;
+        for (let i = 3; i <= Math.sqrt(n); i = i + 2)
+            if (n % i === 0) return false;
+        return true;
+    };
+
+    let arreglo = Array();
+    arreglo.push(2);
+    arreglo.push(3);
+    const Metodo05 = n => {
+        if (n == 1) return false;
+        if (n == 2) return true;
+        if (n % 2 == 0) return false;
+        i = 0;
+        while (i < arreglo.length) {
+            if (n == arreglo[i]) return true;
+            if (n % arreglo[i] === 0) return false;
+            i++;
+        }
+        for (let j = arreglo[arreglo.length - 1] + 2; j < Math.sqrt(n); j = j + 2)
+            if (n % j == 0) return false;
+        arreglo.push(n);
+        return true;
+    };
+
+    const Procesar = x => {
+
+        limpiar();
+        const inicio = new Date();
+        n = getNumber();
+        let c = 0;
+        for (let i = 1; i <= n; i++) {
+            let val;
+            switch (x) {
+                case 1: val = Metodo01(i); break;
+                case 2: val = Metodo02(i); break;
+                case 3: val = Metodo03(i); break;
+                case 4: val = Metodo04(i); break;
+                case 5: val = Metodo05(i); break;
+                default: break;
+            }
+            if (val) {
+                c++;
+                imprimir(i);
+            }
+        }
+
+        imprimir("Metodo " + x);
+        imprimir("Cantidad = " + c);
+        const fin = new Date();
+        const tiempo = fin - inicio;
+        imprimir("Tiempo = " + tiempo);
+
+    };
+
+    const botonLimpiar = () => {
+        limpiar();
+    };
+</script>
