@@ -100,10 +100,10 @@ https://gitlab.com/alan.lucki
     const ran = (max, min) => Math.round(Math.random() * (max - min) + min);
 </script>
 <script>
-    const imprimir = x => print(txtS, x);
+    const pri = x => print(txtS, x);
     const getNumber = () => txtNumber.value;
-    const generaAleatorio = () => set(txtNumber, ran(1000, 9999));
-    const limpiar = () => clear(txtS);
+    const setRan = () => set(txtNumber, ran(1000, 9999));
+    const cle = () => clear(txtS);
 </script>
 <script>
     class Nodo {
@@ -137,20 +137,20 @@ https://gitlab.com/alan.lucki
     };
 
     const listar = () => {
-        limpiar();
+        cle();
         if (ls === null)
-            imprimir("la lista está vacía...");
+            pri("la lista está vacía...");
         else {
             let aux = ls;
             let i = 0;
-            imprimir("\taux");
+            pri("\taux");
             while (aux !== null) {
                 i++;
-                imprimir(i + ")\t" + aux.getNumero());
+                pri(i + ")\t" + aux.getNumero());
                 aux = aux.sig;
             }
         }
-        generaAleatorio();
+        setRan();
     };
     const reportar = () => {
         log('reportar()');
@@ -214,7 +214,7 @@ https://gitlab.com/alan.lucki
         listar();
     };
 
-    generaAleatorio();
+    setRan();
     setEnPila();
     setEnPila();
     setEnPila();
