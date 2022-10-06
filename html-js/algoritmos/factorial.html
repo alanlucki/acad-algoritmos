@@ -72,10 +72,10 @@ https://gitlab.com/alan.lucki
     const ran = (max, min) => Math.round(Math.random() * (max - min) + min);
 </script>
 <script>
-    const imprimir = x => print(txtS, x);
+    const pri = x => print(txtS, x);
     const getNumber = () => txtNumber.value;
-    const generaAleatorio = () => set(txtNumber, ran(1000, 9999));
-    const limpiar = () => clear(txtS);
+    const setRan = () => set(txtNumber, ran(1000, 9999));
+    const cle = () => clear(txtS);
     set(txtNumber, 20);
 </script>
 <script>
@@ -96,6 +96,6 @@ https://gitlab.com/alan.lucki
     };
     const btnRecursivo = () => { };
     const btnLimpiar = () => {
-        limpiar();
+        cle();
     };
 </script>
