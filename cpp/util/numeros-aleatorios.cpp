@@ -11,7 +11,7 @@ double Math_random()
     return rand / base;
 }
 
-int aleatorioEntre(int min, int max)
+double aleatorioEntre(int min, int max)
 {
     return Math_random() * (max + 1 - min) + min;
 }
@@ -21,7 +21,7 @@ int main()
 
     for (int i = 0; i < 20; i++)
     {
-        int val = aleatorioEntre(1, 10);
+        double val = aleatorioEntre(1, 10);
         cout << val << endl;
     }
 
