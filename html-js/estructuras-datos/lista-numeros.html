@@ -18,6 +18,11 @@ https://gitlab.com/alan.lucki
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
 </head>
+<style>
+    .hide {
+        display: none !important;
+    }
+</style>
 
 <body style="font-family: 'Roboto Mono',monospace;">
     <br>
@@ -43,43 +48,51 @@ https://gitlab.com/alan.lucki
                     </div>
                     <div class="col-2">
                         <div class="row mb-1">
-                            <button onclick="setEnPila()" class="btn btn-secondary form-control">ingresar al
+                            <button onclick="btnSetEnPila()" class="btn btn-secondary form-control">ingresar al
                                 inicio</button>
                         </div>
                         <div class="row mb-1">
-                            <button onclick="listar()" class="btn btn-secondary form-control">listar</button>
+                            <button onclick="btnListar()" class="btn btn-secondary form-control">listar</button>
                         </div>
                         <div class="row mb-1">
-                            <button onclick="reportar()" class="btn btn-secondary form-control">reportar</button>
+                            <button onclick="btnReportar()" class="btn btn-secondary form-control">reportar</button>
                         </div>
                         <div class="row mb-1">
-                            <button onclick="eliminarInicio()" class="btn btn-secondary form-control">eliminar al
+                            <button onclick="btnEliminarInicio()" class="btn btn-secondary form-control">eliminar al
                                 inicio</button>
                         </div>
                         <div class="row mb-1">
-                            <button onclick="eliminarLista()" class="btn btn-secondary form-control">eliminar
+                            <button onclick="btnEliminarLista()" class="btn btn-secondary form-control">eliminar
                                 lista</button>
                         </div>
                         <div class="row mb-1">
-                            <button onclick="setEnCola()" class="btn btn-secondary form-control">ingresar al
+                            <button onclick="btnSetEnCola()" class="btn btn-secondary form-control">ingresar al
                                 final</button>
                         </div>
                         <div class="row mb-1">
-                            <button onclick="eliminarFinal()" class="btn btn-secondary form-control">eliminar al
+                            <button onclick="btnEliminarFinal()" class="btn btn-secondary form-control">eliminar al
                                 final</button>
                         </div>
                         <div class="row mb-1">
-                            <button onclick="primeroAlFinal()" class="btn btn-secondary form-control">primero al
+                            <button onclick="btnPrimeroAlFinal()" class="btn btn-secondary form-control">primero al
                                 final</button>
                         </div>
                         <div class="row mb-1">
-                            <button onclick="ultimoAlInicio()" class="btn btn-secondary form-control">último al
+                            <button onclick="btnUltimoAlInicio()" class="btn btn-secondary form-control">último al
                                 inicio</button>
                         </div>
                         <div class="row mb-1">
-                            <button onclick="invertirLista()" class="btn btn-secondary form-control">invertir
+                            <button onclick="btnInvertirLista()" class="btn btn-secondary form-control">invertir
                                 lista</button>
                         </div>
+                        <div class="row mb-1">
+                            <button onclick="btnReiniciar()" class="btn btn-secondary form-control">reiniciar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1 hide">
+                    <div class="col-12">
+                        <textarea class="form-control" id="txtSConsola" rows="10" disabled="disabled"></textarea>
                     </div>
                 </div>
             </div>
@@ -103,7 +116,11 @@ https://gitlab.com/alan.lucki
     const pri = x => print(txtS, x);
     const getNumber = () => txtNumber.value;
     const setRan = () => set(txtNumber, ran(1000, 9999));
+    const setNum = x => set(txtNumber, x);
     const cle = () => clear(txtS);
+
+    const priCon = x => print(txtSConsola, x);
+    const cleCon = () => clear(txtSConsola);
 </script>
 <script>
     // algortimos
@@ -121,7 +138,6 @@ https://gitlab.com/alan.lucki
         let n = new Nodo(getNumber());
         n.sig = ls;
         ls = n;
-        listar();
     };
     const setEnCola = () => {
         let n = new Nodo(getNumber());
@@ -134,9 +150,7 @@ https://gitlab.com/alan.lucki
             }
             aux.sig = n;
         }
-        listar();
     };
-
     const listar = () => {
         cle();
         if (ls === null)
@@ -151,7 +165,6 @@ https://gitlab.com/alan.lucki
                 aux = aux.sig;
             }
         }
-        setRan();
     };
     const reportar = () => {
         log('reportar()');
@@ -159,11 +172,9 @@ https://gitlab.com/alan.lucki
     const eliminarInicio = () => {
         if (ls !== null)
             ls = ls.sig;
-        listar();
     };
     const eliminarLista = () => {
         ls = null;
-        listar();
     };
     const eliminarFinal = () => {
         if (ls !== null) {
@@ -177,7 +188,6 @@ https://gitlab.com/alan.lucki
                 aux.sig = null;
             }
         }
-        listar();
     };
     const primeroAlFinal = () => {
         if (ls !== null && ls.sig !== null) {
@@ -190,7 +200,6 @@ https://gitlab.com/alan.lucki
             }
             aux.sig = temp;
         }
-        listar();
     };
     const ultimoAlInicio = () => {
         if (ls !== null && ls.sig !== null) {
@@ -203,20 +212,79 @@ https://gitlab.com/alan.lucki
             temp.sig = ls;
             ls = temp;
         }
-        listar();
     };
     const invertirLista = () => {
         if (ls !== null && ls.sig !== null) {
             let aux = ls;
-            while (aux !== null) {
-                aux = aux.sig;
+            let temp;
+            while (aux.sig.sig !== null) {
+                temp = aux.sig;
+                aux.sig = aux.sig.sig;
+                temp.sig = ls;
+                ls = temp;
             }
+            temp = aux.sig;
+            aux.sig = null;
+            temp.sig = ls;
+            ls = temp;
         }
-        listar();
     };
 
-    setRan();
-    setEnPila();
-    setEnPila();
-    setEnPila();
+    //eventos
+    const btnSetEnPila = () => {
+        setEnPila();
+        listar();
+    };
+    const btnSetEnCola = () => {
+        setEnCola();
+        listar();
+    };
+    const btnListar = () => {
+        listar();
+        setRan();
+    };
+    const btnReportar = () => {
+        cle();
+        pri('Método sin desarrollar');
+    };
+    const btnEliminarInicio = () => {
+        eliminarInicio();
+        listar();
+    };
+    const btnEliminarLista = () => {
+        eliminarLista();
+        listar();
+    };
+    const btnEliminarFinal = () => {
+        eliminarFinal();
+        listar();
+    };
+    const btnPrimeroAlFinal = () => {
+        primeroAlFinal();
+        listar();
+    };
+    const btnUltimoAlInicio = () => {
+        ultimoAlInicio();
+        listar();
+    };
+    const btnInvertirLista = () => {
+        invertirLista();
+        listar();
+    };
+    const btnReiniciar = () => {
+        eliminarLista();
+        inicio();
+    };
+    const inicio = () => {
+        setNum(1); setEnCola();
+        setNum(2); setEnCola();
+        setNum(3); setEnCola();
+        setNum(4); setEnCola();
+        setNum(5); setEnCola();
+        setNum(6); setEnCola();
+        listar();
+        cleCon();
+    };
+    inicio();
+
 </script>
