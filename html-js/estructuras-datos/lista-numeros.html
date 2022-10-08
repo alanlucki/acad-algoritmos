@@ -94,7 +94,7 @@ https://gitlab.com/alan.lucki
                         </div>
                     </div>
                 </div>
-                <div class="row mb-1 hide">
+                <div class="row mb-1">
                     <div class="col-12">
                         <textarea class="form-control" id="txtSConsola" rows="10" disabled="disabled"></textarea>
                     </div>
@@ -115,6 +115,8 @@ https://gitlab.com/alan.lucki
     const set = (control, cadena) => control.value = cadena;
     const log = x => console.log(x);
     const ran = (max, min) => Math.round(Math.random() * (max - min) + min);
+    const int = x => parseInt(x);
+    const flo = x => parseFloat(x);
 </script>
 <script>
     const pri = x => print(txtS, x);
@@ -171,11 +173,55 @@ https://gitlab.com/alan.lucki
         }
     };
 
-    const cantIngresos = () => { };
-    const sumNumeros = () => { };
-    const numMenor = () => { };
-    const numMayor = () => { };
-    const promNumeros = () => { };
+    const cantIngresos = () => {
+        let aux = ls;
+        let i = 0;
+        while (aux !== null) {
+            i++;
+            aux = aux.sig;
+        }
+        return i;
+    };
+    const sumNumeros = () => { 
+        let aux = ls;
+        let s= 0;
+        while (aux !== null) {
+            s+=flo(aux.getNumero());
+            aux = aux.sig;
+        }
+        return s;
+    };
+    const numMenor = () => {
+        let aux = ls;
+        let min = aux.getNumero();
+        let c = 0 ;
+        while (aux !== null) {
+            c++;
+            if( aux.getNumero() < min ) min = aux.getNumero();
+            aux = aux.sig;
+        }
+        return min;
+    };
+    const numMayor = () => { 
+        let aux = ls;
+        let max = aux.getNumero();
+        while (aux !== null) {
+            if( aux.getNumero() > max ) max = aux.getNumero();
+            aux = aux.sig;
+        }
+        return max;
+    };
+    const promNumeros = () => { 
+        let aux = ls;
+        let s = 0;
+        let c = 0;
+        while (aux !== null) {
+            c++;
+            s+=flo( aux.getNumero() );
+            aux = aux.sig;
+        }
+        return s/c;
+    };
     const cantPares = () => { };
     const cantImpares = () => { };
     const sumPares = () => { };
