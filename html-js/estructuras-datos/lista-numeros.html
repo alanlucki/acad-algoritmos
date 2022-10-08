@@ -157,6 +157,66 @@ https://gitlab.com/alan.lucki
             aux.sig = n;
         }
     };
+    const eliminarInicio = () => {
+        if (ls !== null)
+            ls = ls.sig;
+    };
+    const eliminarLista = () => {
+        ls = null;
+    };
+    const eliminarFinal = () => {
+        if (ls !== null) {
+            if (ls.sig === null)
+                ls = null;
+            else {
+                let aux = ls;
+                while (aux.sig.sig !== null) {
+                    aux = aux.sig;
+                }
+                aux.sig = null;
+            }
+        }
+    };
+    const primeroAlFinal = () => {
+        if (ls !== null && ls.sig !== null) {
+            let temp = ls;
+            ls = ls.sig;
+            temp.sig = null;
+            let aux = ls;
+            while (aux.sig !== null) {
+                aux = aux.sig;
+            }
+            aux.sig = temp;
+        }
+    };
+    const ultimoAlInicio = () => {
+        if (ls !== null && ls.sig !== null) {
+            let aux = ls;
+            while (aux.sig.sig !== null) {
+                aux = aux.sig;
+            }
+            let temp = aux.sig;
+            aux.sig = null;
+            temp.sig = ls;
+            ls = temp;
+        }
+    };
+    const invertirLista = () => {
+        if (ls !== null && ls.sig !== null) {
+            let aux = ls;
+            let temp;
+            while (aux.sig.sig !== null) {
+                temp = aux.sig;
+                aux.sig = aux.sig.sig;
+                temp.sig = ls;
+                ls = temp;
+            }
+            temp = aux.sig;
+            aux.sig = null;
+            temp.sig = ls;
+            ls = temp;
+        }
+    };
     const listar = () => {
         cle();
         if (ls === null)
@@ -252,66 +312,7 @@ https://gitlab.com/alan.lucki
             pri("m) porcentaje de impares :  " + porcImpares());
         }
     };
-    const eliminarInicio = () => {
-        if (ls !== null)
-            ls = ls.sig;
-    };
-    const eliminarLista = () => {
-        ls = null;
-    };
-    const eliminarFinal = () => {
-        if (ls !== null) {
-            if (ls.sig === null)
-                ls = null;
-            else {
-                let aux = ls;
-                while (aux.sig.sig !== null) {
-                    aux = aux.sig;
-                }
-                aux.sig = null;
-            }
-        }
-    };
-    const primeroAlFinal = () => {
-        if (ls !== null && ls.sig !== null) {
-            let temp = ls;
-            ls = ls.sig;
-            temp.sig = null;
-            let aux = ls;
-            while (aux.sig !== null) {
-                aux = aux.sig;
-            }
-            aux.sig = temp;
-        }
-    };
-    const ultimoAlInicio = () => {
-        if (ls !== null && ls.sig !== null) {
-            let aux = ls;
-            while (aux.sig.sig !== null) {
-                aux = aux.sig;
-            }
-            let temp = aux.sig;
-            aux.sig = null;
-            temp.sig = ls;
-            ls = temp;
-        }
-    };
-    const invertirLista = () => {
-        if (ls !== null && ls.sig !== null) {
-            let aux = ls;
-            let temp;
-            while (aux.sig.sig !== null) {
-                temp = aux.sig;
-                aux.sig = aux.sig.sig;
-                temp.sig = ls;
-                ls = temp;
-            }
-            temp = aux.sig;
-            aux.sig = null;
-            temp.sig = ls;
-            ls = temp;
-        }
-    };
+
 
     //eventos
     const btnSetEnPila = () => {
