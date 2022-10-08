@@ -115,6 +115,8 @@ https://gitlab.com/alan.lucki
     const set = (control, cadena) => control.value = cadena;
     const log = x => console.log(x);
     const ran = (max, min) => Math.round(Math.random() * (max - min) + min);
+    const int = x => parseInt(x);
+    const flo = x => parseFloat(x);
 </script>
 <script>
     const pri = x => print(txtS, x);
@@ -133,7 +135,7 @@ https://gitlab.com/alan.lucki
             this.numero = numero;
             this.sig = null;
         }
-        getNumero = () => this.numero;
+        getNumero = () => flo(this.numero);
     }
 
     let ls = null;
@@ -153,57 +155,6 @@ https://gitlab.com/alan.lucki
                 aux = aux.sig;
             }
             aux.sig = n;
-        }
-    };
-    const listar = () => {
-        cle();
-        if (ls === null)
-            pri("la lista está vacía...");
-        else {
-            let aux = ls;
-            let i = 0;
-            pri("\taux");
-            while (aux !== null) {
-                i++;
-                pri(i + ")\t" + aux.getNumero());
-                aux = aux.sig;
-            }
-        }
-    };
-
-    const cantIngresos = () => { };
-    const sumNumeros = () => { };
-    const numMenor = () => { };
-    const numMayor = () => { };
-    const promNumeros = () => { };
-    const cantPares = () => { };
-    const cantImpares = () => { };
-    const sumPares = () => { };
-    const sumImpares = () => { };
-    const promPares = () => { };
-    const promImpares = () => { };
-    const porcPares = () => { };
-    const porcImpares = () => { };
-
-    const reportar = () => {
-        if (ls != null) {
-            listar();
-            pri("");
-            pri("Reporte");
-            pri("=======");
-            pri("a) cantidad de números :  " + cantIngresos());
-            pri("b) suma de los números :  " + sumNumeros());
-            pri("c) menor números :  " + numMenor());
-            pri("d) mayor números :  " + numMayor());
-            pri("e) promedio :  " + promNumeros());
-            pri("f) cantidad de pares :  " + cantPares());
-            pri("g) cantidad de impares :  " + cantImpares());
-            pri("h) suma de los pares :  " + sumPares());
-            pri("i) suma de los impares :  " + sumImpares());
-            pri("j) promedio de los pares :  " + promPares());
-            pri("k) promedio de los impares :  " + promImpares());
-            pri("l) porcentaje de pares :  " + porcPares());
-            pri("m) porcentaje de impares :  " + porcImpares());
         }
     };
     const eliminarInicio = () => {
@@ -266,6 +217,178 @@ https://gitlab.com/alan.lucki
             ls = temp;
         }
     };
+    const listar = () => {
+        cle();
+        if (ls === null)
+            pri("la lista está vacía...");
+        else {
+            let aux = ls;
+            let i = 0;
+            pri("\taux");
+            while (aux !== null) {
+                i++;
+                pri(i + ")\t" + aux.getNumero());
+                aux = aux.sig;
+            }
+        }
+    };
+
+    const cantIngresos = () => {
+        let aux = ls;
+        let i = 0;
+        while (aux !== null) {
+            i++;
+            aux = aux.sig;
+        }
+        return i;
+    };
+    const sumNumeros = () => {
+        let aux = ls;
+        let s = 0;
+        while (aux !== null) {
+            s += aux.getNumero();
+            aux = aux.sig;
+        }
+        return s;
+    };
+    const numMenor = () => {
+        let aux = ls;
+        let min = aux.getNumero();
+        let c = 0;
+        while (aux !== null) {
+            c++;
+            if (aux.getNumero() < min) min = aux.getNumero();
+            aux = aux.sig;
+        }
+        return min;
+    };
+    const numMayor = () => {
+        let aux = ls;
+        let max = aux.getNumero();
+        while (aux !== null) {
+            if (aux.getNumero() > max) max = aux.getNumero();
+            aux = aux.sig;
+        }
+        return max;
+    };
+    const promNumeros = () => {
+        let aux = ls;
+        let s = 0;
+        let c = 0;
+        while (aux !== null) {
+            c++;
+            s += aux.getNumero();
+            aux = aux.sig;
+        }
+        return s / c;
+    };
+    const cantPares = () => {
+        let aux = ls;
+        let c = 0;
+        while (aux !== null) {
+            if (aux.getNumero() % 2 == 0) c++;
+            aux = aux.sig;
+        }
+        return c;
+    };
+    const cantImpares = () => {
+        let aux = ls;
+        let c = 0;
+        while (aux !== null) {
+            if (aux.getNumero() % 2 != 0) c++;
+            aux = aux.sig;
+        }
+        return c;
+    };
+    const sumPares = () => {
+        let aux = ls;
+        let s = 0;
+        while (aux !== null) {
+            if (aux.getNumero() % 2 == 0) s += aux.getNumero();
+            aux = aux.sig;
+        }
+        return s;
+    };
+    const sumImpares = () => {
+        let aux = ls;
+        let s = 0;
+        while (aux !== null) {
+            if (aux.getNumero() % 2 != 0) s += aux.getNumero();
+            aux = aux.sig;
+        }
+        return s;
+    };
+    const promPares = () => {
+        let aux = ls;
+        let s = 0;
+        let c = 0;
+        while (aux !== null) {
+            if (aux.getNumero() % 2 == 0) {
+                s += aux.getNumero();
+                c++;
+            }
+            aux = aux.sig;
+        }
+        return s / c;
+    };
+    const promImpares = () => {
+        let aux = ls;
+        let s = 0;
+        let c = 0;
+        while (aux !== null) {
+            if (aux.getNumero() % 2 != 0) {
+                s += aux.getNumero();
+                c++;
+            }
+            aux = aux.sig;
+        }
+        return s / c;
+    };
+    const porcPares = () => {
+        let aux = ls;
+        let s = 0;
+        let c = 0;
+        while (aux !== null) {
+            if (aux.getNumero() % 2 == 0) s++;
+            c++;
+            aux = aux.sig;
+        }
+        return (100 * s / c) + ' %';
+    };
+    const porcImpares = () => {
+        let aux = ls;
+        let s = 0;
+        let c = 0;
+        while (aux !== null) {
+            if (aux.getNumero() % 2 != 0) s++;
+            c++;
+            aux = aux.sig;
+        }
+        return (100 * s / c) + ' %';
+    };
+
+    const reportar = () => {
+        if (ls != null) {
+            listar();
+            pri("");
+            pri("Reporte");
+            pri("=======");
+            pri("a) cantidad de números :  " + cantIngresos());
+            pri("b) suma de los números :  " + sumNumeros());
+            pri("c) menor números :  " + numMenor());
+            pri("d) mayor números :  " + numMayor());
+            pri("e) promedio :  " + promNumeros());
+            pri("f) cantidad de pares :  " + cantPares());
+            pri("g) cantidad de impares :  " + cantImpares());
+            pri("h) suma de los pares :  " + sumPares());
+            pri("i) suma de los impares :  " + sumImpares());
+            pri("j) promedio de los pares :  " + promPares());
+            pri("k) promedio de los impares :  " + promImpares());
+            pri("l) porcentaje de pares :  " + porcPares());
+            pri("m) porcentaje de impares :  " + porcImpares());
+        }
+    };
+
 
     //eventos
     const btnSetEnPila = () => {
