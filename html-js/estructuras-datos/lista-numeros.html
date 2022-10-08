@@ -37,14 +37,14 @@ https://gitlab.com/alan.lucki
                         <label class="form-label">Ingrese Número:</label>
                     </div>
                     <div class="col-3">
-                        <input class="form-control" id="txtNumber" disabled="disabled">
+                        <input class="form-control" id="txtNumber">
                     </div>
                 </div>
             </div>
             <div class="card-footer">
                 <div class="row mb-1">
                     <div class="col-10">
-                        <textarea class="form-control" id="txtS" rows="20" disabled="disabled"></textarea>
+                        <textarea class="form-control" id="txtS" rows="30" disabled="disabled"></textarea>
                     </div>
                     <div class="col-2">
                         <div class="row mb-1">
@@ -84,6 +84,10 @@ https://gitlab.com/alan.lucki
                         <div class="row mb-1">
                             <button onclick="btnInvertirLista()" class="btn btn-secondary form-control">invertir
                                 lista</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnGenerarAleatorio()"
+                                class="btn btn-secondary form-control">Aleatorio</button>
                         </div>
                         <div class="row mb-1">
                             <button onclick="btnReiniciar()" class="btn btn-secondary form-control">reiniciar</button>
@@ -166,8 +170,41 @@ https://gitlab.com/alan.lucki
             }
         }
     };
+
+    const cantIngresos = () => { };
+    const sumNumeros = () => { };
+    const numMenor = () => { };
+    const numMayor = () => { };
+    const promNumeros = () => { };
+    const cantPares = () => { };
+    const cantImpares = () => { };
+    const sumPares = () => { };
+    const sumImpares = () => { };
+    const promPares = () => { };
+    const promImpares = () => { };
+    const porcPares = () => { };
+    const porcImpares = () => { };
+
     const reportar = () => {
-        log('reportar()');
+        if (ls != null) {
+            listar();
+            pri("");
+            pri("Reporte");
+            pri("=======");
+            pri("a) cantidad de números :  " + cantIngresos());
+            pri("b) suma de los números :  " + sumNumeros());
+            pri("c) menor números :  " + numMenor());
+            pri("d) mayor números :  " + numMayor());
+            pri("e) promedio :  " + promNumeros());
+            pri("f) cantidad de pares :  " + cantPares());
+            pri("g) cantidad de impares :  " + cantImpares());
+            pri("h) suma de los pares :  " + sumPares());
+            pri("i) suma de los impares :  " + sumImpares());
+            pri("j) promedio de los pares :  " + promPares());
+            pri("k) promedio de los impares :  " + promImpares());
+            pri("l) porcentaje de pares :  " + porcPares());
+            pri("m) porcentaje de impares :  " + porcImpares());
+        }
     };
     const eliminarInicio = () => {
         if (ls !== null)
@@ -241,11 +278,9 @@ https://gitlab.com/alan.lucki
     };
     const btnListar = () => {
         listar();
-        setRan();
     };
     const btnReportar = () => {
-        cle();
-        pri('Método sin desarrollar');
+        reportar();
     };
     const btnEliminarInicio = () => {
         eliminarInicio();
@@ -274,6 +309,9 @@ https://gitlab.com/alan.lucki
     const btnReiniciar = () => {
         eliminarLista();
         inicio();
+    };
+    const btnGenerarAleatorio = () => {
+        setRan();
     };
     const inicio = () => {
         setNum(1); setEnCola();
