@@ -1,0 +1,157 @@
+<!--
+
+Autor   : Lucki Alan Fernandez Salcedo
+email   : alan.lucki@gmail.com
+
+https://github.com/alanlucki/
+https://gitlab.com/alan.lucki
+
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lista Simple 02</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
+</head>
+<style>
+    .hide {
+        display: none !important;
+    }
+</style>
+
+<body style="font-family: 'Roboto Mono',monospace;">
+    <br>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h5>Lista Simple 02</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-2">
+                        <label class="form-label">Ingrese Número:</label>
+                    </div>
+                    <div class="col-3">
+                        <input class="form-control" id="txtNumber">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row mb-1">
+                    <div class="col-7">
+                        <textarea class="form-control" id="txtS" rows="30" disabled="disabled"></textarea>
+                    </div>
+                    <div class="col-5">
+                        <div class="row mb-1">
+                            <button onclick="btnIngresarDistinto()" class="btn btn-secondary form-control">ingresar
+                                distinto</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnSegundoAlFinal()" class="btn btn-secondary form-control">segundo al
+                                final</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnPenultimoAlInicio()" class="btn btn-secondary form-control">penúltimo al
+                                inicio</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnBuscarEliminar()" class="btn btn-secondary form-control">buscar y
+                                eliminar</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnBuscarPriorizar()" class="btn btn-secondary form-control">buscar y
+                                priorizar</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnBuscarRezagar()" class="btn btn-secondary form-control">buscar y
+                                rezagar</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnEliminarExtremos()" class="btn btn-secondary form-control">eliminar
+                                extremos</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnElimSegPenultimo()" class="btn btn-secondary form-control">elim. seg. y
+                                penúltimo</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnIntercambiarExtremos()"
+                                class="btn btn-secondary form-control">intercambiar extremos</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnGenerarAleatorio()" class="btn btn-secondary form-control">generar
+                                aleatorio</button>
+                        </div>
+                        <div class="row mb-1">
+                            <button onclick="btnReiniciar()" class="btn btn-secondary form-control">reiniciar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1 hide">
+                    <div class="col-12">
+                        <textarea class="form-control" id="txtSConsola" rows="10" disabled="disabled"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                Autor: alan.lucki@gmail.com
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const print = (control, cadena) => control.value = control.value + cadena + '\n';
+    const clear = control => control.value = '';
+    const set = (control, cadena) => control.value = cadena;
+    const log = x => console.log(x);
+    const ran = (max, min) => Math.round(Math.random() * (max - min) + min);
+    const int = x => parseInt(x);
+    const flo = x => parseFloat(x);
+</script>
+<script>
+    const pri = x => print(txtS, x);
+    const getNumber = () => txtNumber.value;
+    const setRan = () => set(txtNumber, ran(1000, 9999));
+    const setNum = x => set(txtNumber, x);
+    const cle = () => clear(txtS);
+
+    const priCon = x => print(txtSConsola, x);
+    const cleCon = () => clear(txtSConsola);
+</script>
+<script>
+    // algortimos
+    class Nodo {
+        constructor(numero) {
+            this.numero = numero;
+            this.sig = null;
+        }
+        getNumero = () => flo(this.numero);
+    }
+
+    let ls = null;
+
+    const btnIngresarDistinto = () => { };
+    const btnSegundoAlFinal = () => { };
+    const btnPenultimoAlInicio = () => { };
+    const btnBuscarEliminar = () => { };
+    const btnBuscarPriorizar = () => { };
+    const btnBuscarRezagar = () => { };
+    const btnEliminarExtremos = () => { };
+    const btnElimSegPenultimo = () => { };
+    const btnIntercambiarExtremos = () => { };
+    const btnGenerarAleatorio = () => { };
+    const btnReiniciar = () => { };
+
+    const inicio = () => {
+    };
+    inicio();
+
+</script>
