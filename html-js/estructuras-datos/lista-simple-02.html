@@ -92,7 +92,7 @@ https://gitlab.com/alan.lucki
                         </div>
                     </div>
                 </div>
-                <div class="row mb-1 hide">
+                <div class="row mb-1">
                     <div class="col-12">
                         <textarea class="form-control" id="txtSConsola" rows="10" disabled="disabled"></textarea>
                     </div>
@@ -137,20 +137,120 @@ https://gitlab.com/alan.lucki
 
     let ls = null;
 
-    const btnIngresarDistinto = () => { };
-    const btnSegundoAlFinal = () => { };
-    const btnPenultimoAlInicio = () => { };
-    const btnBuscarEliminar = () => { };
-    const btnBuscarPriorizar = () => { };
-    const btnBuscarRezagar = () => { };
-    const btnEliminarExtremos = () => { };
-    const btnElimSegPenultimo = () => { };
-    const btnIntercambiarExtremos = () => { };
-    const btnGenerarAleatorio = () => { };
-    const btnReiniciar = () => { };
+    const setEnPila = () => {
+        let n = new Nodo(getNumber());
+        n.sig = ls;
+        ls = n;
+    };
+    const setEnCola = () => {
+        let n = new Nodo(getNumber());
+        if (ls === null)
+            ls = n;
+        else {
+            let aux = ls;
+            while (aux.sig !== null) {
+                aux = aux.sig;
+            }
+            aux.sig = n;
+        }
+    };
+    const eliminarLista = () => {
+        ls = null;
+    };
+    const existeEnLista = x => {
+        if (ls === null)
+            return -1;
+        if (ls !== null && ls.getNumero() == x)
+            return 0;
+
+        let aux = ls;
+        let i = -1;
+        while (aux !== null) {
+            i++;
+            if (aux.getNumero() == x) return i;
+            aux = aux.sig;
+        }
+        return -1;
+    };
+    const segundoAlFinal = () => {};
+    const penultimoAlInicio = () => {};
+    const buscarYEliminar = () => {};
+    const buscarYPriorizar = () => {};
+    const buscarYRezagar = () => {};
+    const eliminarExtremos = () => {};
+    const eliminarSegundoYPenultimo = () => {};
+    const intercambiarExtremos = () => {};
+
+    const listar = () => {
+        cle();
+        if (ls === null)
+            pri("la lista está vacía...");
+        else {
+            let aux = ls;
+            let i = 0;
+            pri("\taux");
+            while (aux !== null) {
+                i++;
+                pri(i + ")\t" + aux.getNumero());
+                aux = aux.sig;
+            }
+        }
+    };
+
+    const btnIngresarDistinto = () => {
+        if (existeEnLista(getNumber()) == -1) {
+            setEnCola();
+            listar();
+        }
+    };
+    const btnSegundoAlFinal = () => { 
+        segundoAlFinal();
+    };
+    const btnPenultimoAlInicio = () => { 
+        penultimoAlInicio();
+    };
+    const btnBuscarEliminar = () => {
+        buscarYEliminar();
+     };
+    const btnBuscarPriorizar = () => { 
+        buscarYPriorizar();
+    };
+    const btnBuscarRezagar = () => { 
+        buscarYRezagar();
+    };
+    const btnEliminarExtremos = () => { 
+        eliminarExtremos();
+    };
+    const btnElimSegPenultimo = () => { 
+        eliminarSegundoYPenultimo();
+    };
+    const btnIntercambiarExtremos = () => { 
+        intercambiarExtremos();
+    };
+    const btnGenerarAleatorio = () => {
+        setRan();
+    };
+    const btnReiniciar = () => {
+        inicio();
+    };
 
     const inicio = () => {
+        eliminarLista();
+        setNum(1); setEnCola();
+        setNum(2); setEnCola();
+        setNum(3); setEnCola();
+        setNum(4); setEnCola();
+        setNum(5); setEnCola();
+        setNum(6); setEnCola();
+        listar();
+        cleCon();
     };
     inicio();
 
 </script>
+
+
+Propuestas
+==========
+[ 01 ] Country Club - Costo
+[ 02 ] Polideportivo de Causarinas - Gratis
