@@ -11,4 +11,4 @@
 ###### Números Primos : https://github.com/alanlucki/acad-algoritmos/blob/main/html-js/algoritmos/numeros-primos.html
 
 ### Estructura de Datos
-###### lista de números : https://github.com/alanlucki/acad-algoritmos/blob/main/html-js/estructuras-datos/lista-numeros.html
+###### lista de números : https://github.com/alanlucki/acad-algoritmos/blob/main/html-js/estructuras-datos/lista-simple-01.html
