@@ -9,13 +9,8 @@ git pull
 echo 'add .'
 git add .
 
-echo 'Ingresar mensaje commit:'
-
-read mensaje_commit
-mensaje=$d' - '$mensaje_commit
-
-git commit -m "$mensaje"
-echo 'commit ' $mensaje
+git commit -m "$d - [Express] Cambio Menor"
+echo 'commit' $d '- [Express] Cambio Menor'
 
 git push
-echo 'push...'
+echo 'push .'
