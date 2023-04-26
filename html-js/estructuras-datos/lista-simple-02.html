@@ -172,15 +172,88 @@ https://gitlab.com/alan.lucki
         }
         return -1;
     };
-    const segundoAlFinal = () => {};
-    const penultimoAlInicio = () => {};
-    const buscarYEliminar = () => {};
-    const buscarYPriorizar = () => {};
-    const buscarYRezagar = () => {};
-    const eliminarExtremos = () => {};
-    const eliminarSegundoYPenultimo = () => {};
-    const intercambiarExtremos = () => {};
+    const segundoAlFinal = () => {
+        if (ls === null) {
+            pri("la lista está vacía...");
+            return -1;
+        }
+        let temp = ls.sig;
+        ls.sig = ls.sig.sig;
+        temp.sig = null;
+        let aux = ls;
+        while (aux.sig !== null) {
+            aux = aux.sig;
+        }
+        aux.sig = temp;
+        listar();
+    };
+    const penultimoAlInicio = () => {
+        let aux = ls;
+        while (aux.sig.sig.sig !== null) {
+            aux = aux.sig;
+        }
+        let temp = aux.sig;
+        aux.sig = aux.sig.sig;
+        temp.sig = ls;
+        ls = temp;
+        listar();
+        // ls -> 1 -> 2 -> 3 -> 4 -> null
 
+        // aux.sig          != null  => aux ultimo
+        // aux.sig.sig      != null  => aux penultimo
+        // aux.sig.sig.sig  != null  => aux antepenultimo
+
+    };
+    const buscarYEliminar = () => {
+        let aux = ls;
+        if (aux.numero == getNumber()) {
+            aux = aux.sig
+            ls = aux
+        }
+        else {
+            while (aux.sig.numero !== getNumber()) {
+                aux = aux.sig;
+            }
+            aux.sig = aux.sig.sig                
+        }
+        listar()
+    };
+    const buscarYPriorizar = () => { };
+    const buscarYRezagar = () => { };
+    const eliminarExtremos = () => {
+        if (ls == null) { }
+        else if (ls.sig == null) ls = null;
+        else if (ls.sig.sig == null) ls = null;
+        else {
+            ls = ls.sig;
+            let aux = ls;
+            while (aux.sig.sig !== null) {
+                aux = aux.sig;
+            }
+            aux.sig = null;
+        }
+        listar();
+    };
+    const eliminarSegundoYPenultimo = () => {
+        ls.sig = ls.sig.sig;
+        let aux = ls;
+        while (aux.sig.sig.sig !== null) {
+            aux = aux.sig;
+        }
+        aux.sig = aux.sig.sig;
+        listar();
+    };
+    const intercambiarExtremos = () => {
+        let aux = ls;
+        while (aux.sig.sig !== null) {
+            aux = aux.sig;
+        }
+        let temp = aux.sig;
+        aux.sig = null;
+        temp.sig = ls;
+        ls = temp;
+        segundoAlFinal();
+    };
     const listar = () => {
         cle();
         if (ls === null)
@@ -198,33 +271,34 @@ https://gitlab.com/alan.lucki
     };
 
     const btnIngresarDistinto = () => {
+        setRan();
         if (existeEnLista(getNumber()) == -1) {
             setEnCola();
             listar();
         }
     };
-    const btnSegundoAlFinal = () => { 
+    const btnSegundoAlFinal = () => {
         segundoAlFinal();
     };
-    const btnPenultimoAlInicio = () => { 
+    const btnPenultimoAlInicio = () => {
         penultimoAlInicio();
     };
     const btnBuscarEliminar = () => {
         buscarYEliminar();
-     };
-    const btnBuscarPriorizar = () => { 
+    };
+    const btnBuscarPriorizar = () => {
         buscarYPriorizar();
     };
-    const btnBuscarRezagar = () => { 
+    const btnBuscarRezagar = () => {
         buscarYRezagar();
     };
-    const btnEliminarExtremos = () => { 
+    const btnEliminarExtremos = () => {
         eliminarExtremos();
     };
-    const btnElimSegPenultimo = () => { 
+    const btnElimSegPenultimo = () => {
         eliminarSegundoYPenultimo();
     };
-    const btnIntercambiarExtremos = () => { 
+    const btnIntercambiarExtremos = () => {
         intercambiarExtremos();
     };
     const btnGenerarAleatorio = () => {
@@ -236,12 +310,12 @@ https://gitlab.com/alan.lucki
 
     const inicio = () => {
         eliminarLista();
-        setNum(1); setEnCola();
-        setNum(2); setEnCola();
-        setNum(3); setEnCola();
-        setNum(4); setEnCola();
-        setNum(5); setEnCola();
-        setNum(6); setEnCola();
+        setNum(1111); setEnCola();
+        setNum(2222); setEnCola();
+        setNum(3333); setEnCola();
+        setNum(4444); setEnCola();
+        setNum(5555); setEnCola();
+        setNum(6666); setEnCola();
         listar();
         cleCon();
     };
