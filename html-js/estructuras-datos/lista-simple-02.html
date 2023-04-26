@@ -173,86 +173,129 @@ https://gitlab.com/alan.lucki
         return -1;
     };
     const segundoAlFinal = () => {
-        if (ls === null) {
-            pri("la lista está vacía...");
-            return -1;
+        if (ls != null && ls.sig != null ) {
+            let temp = ls.sig;
+            ls.sig = ls.sig.sig;
+            temp.sig = null;
+            let aux = ls;
+            while (aux.sig !== null) {
+                aux = aux.sig;
+            }
+            aux.sig = temp;
         }
-        let temp = ls.sig;
-        ls.sig = ls.sig.sig;
-        temp.sig = null;
-        let aux = ls;
-        while (aux.sig !== null) {
-            aux = aux.sig;
-        }
-        aux.sig = temp;
         listar();
     };
     const penultimoAlInicio = () => {
-        let aux = ls;
-        while (aux.sig.sig.sig !== null) {
-            aux = aux.sig;
+        if (ls != null && ls.sig != null ) {
+            if (ls.sig != null && ls.sig.sig == null) {
+            }
+            else {
+                let aux = ls;
+                while (aux.sig.sig.sig !== null) {
+                    aux = aux.sig;
+                }
+                let temp = aux.sig;
+                aux.sig = aux.sig.sig;
+                temp.sig = ls;
+                ls = temp;
+            }
         }
-        let temp = aux.sig;
-        aux.sig = aux.sig.sig;
-        temp.sig = ls;
-        ls = temp;
         listar();
-        // ls -> 1 -> 2 -> 3 -> 4 -> null
-
-        // aux.sig          != null  => aux ultimo
-        // aux.sig.sig      != null  => aux penultimo
-        // aux.sig.sig.sig  != null  => aux antepenultimo
-
     };
     const buscarYEliminar = () => {
-        let aux = ls;
-        if (aux.numero == getNumber()) {
-            aux = aux.sig
-            ls = aux
-        }
-        else {
-            while (aux.sig.numero !== getNumber()) {
-                aux = aux.sig;
-            }
-            aux.sig = aux.sig.sig                
+        if (ls != null) {
+            extraerValor(getNumber())
         }
         listar()
     };
-    const buscarYPriorizar = () => { };
-    const buscarYRezagar = () => { };
-    const eliminarExtremos = () => {
-        if (ls == null) { }
-        else if (ls.sig == null) ls = null;
-        else if (ls.sig.sig == null) ls = null;
+    const buscarYPriorizar = () => {
+        if (ls != null) {
+            let temp = extraerValor(getNumber())
+            if (temp != null)
+                setAlInicio(temp)
+        }
+        listar()
+    };
+    const setAlFinal = x => {
+        aux = ls;
+        while (aux.sig !== null) {
+            aux = aux.sig;
+        }
+        aux.sig = x;
+    }
+    const setAlInicio = x => {
+        x.sig = ls;
+        ls = x;
+    }
+    const extraerValor = x => {
+        let temp;
+        let aux = ls;
+        if (aux.numero == x) {
+            temp = aux;
+            aux = aux.sig;
+            temp.sig = null;
+            ls = aux;
+        }
         else {
-            ls = ls.sig;
-            let aux = ls;
-            while (aux.sig.sig !== null) {
+            while (aux.sig != null && aux.sig.numero !== x) {
                 aux = aux.sig;
             }
-            aux.sig = null;
+            if (aux.sig != null) {
+                temp = aux.sig;
+                aux.sig = aux.sig.sig
+                temp.sig = null;
+            }else{
+                temp = null;
+            }
+        }
+        return temp
+    }
+    const buscarYRezagar = () => {
+        if (ls != null && ls.sig != null ) {
+            let temp = extraerValor(getNumber())
+            if (temp != null)
+                setAlFinal(temp)
+        }
+        listar()
+    };
+    const eliminarExtremos = () => {
+        if (ls != null) {
+            if (ls.sig == null) ls = null;
+            else if (ls.sig.sig == null) ls = null;
+            else {
+                ls = ls.sig;
+                let aux = ls;
+                while (aux.sig.sig !== null) {
+                    aux = aux.sig;
+                }
+                aux.sig = null;
+            }
         }
         listar();
     };
     const eliminarSegundoYPenultimo = () => {
-        ls.sig = ls.sig.sig;
-        let aux = ls;
-        while (aux.sig.sig.sig !== null) {
-            aux = aux.sig;
+        if (ls != null && ls.sig != null ) {
+            ls.sig = ls.sig.sig;
+            let aux = ls;
+            while (aux.sig.sig.sig !== null) {
+                aux = aux.sig;
+            }
+            aux.sig = aux.sig.sig;
         }
-        aux.sig = aux.sig.sig;
         listar();
     };
     const intercambiarExtremos = () => {
-        let aux = ls;
-        while (aux.sig.sig !== null) {
-            aux = aux.sig;
+        if (ls != null && ls.sig != null ) {
+            let aux = ls;
+            while (aux.sig.sig !== null) {
+                aux = aux.sig;
+            }
+            let temp = aux.sig;
+            aux.sig = null;
+            temp.sig = ls;
+            ls = temp;
+            segundoAlFinal();
         }
-        let temp = aux.sig;
-        aux.sig = null;
-        temp.sig = ls;
-        ls = temp;
-        segundoAlFinal();
     };
     const listar = () => {
         cle();
