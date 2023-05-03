@@ -1,0 +1,520 @@
+<!--
+
+Autor   : Lucki Alan Fernandez Salcedo
+email   : alan.lucki@gmail.com
+
+https://github.com/alanlucki/
+https://gitlab.com/alan.lucki
+
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lista Simple 03</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto Mono"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    .hide {
+      display: none !important;
+    }
+    .btn {
+      text-align: left;
+    }
+  </style>
+
+  <body style="font-family: 'Roboto Mono', monospace">
+    <br />
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <h5>Lista Simple 03</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-2">
+              <label class="form-label">Ingrese Número:</label>
+            </div>
+            <div class="col-3">
+              <input class="form-control" id="txtNumber" />
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row mb-1">
+            <div class="col-7">
+              <textarea
+                class="form-control"
+                id="txtS"
+                rows="30"
+                disabled="disabled"
+              ></textarea>
+            </div>
+            <div class="col-5">
+              <div class="row mb-1">
+                <button
+                  onclick="btnIngresarAlInicio()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ a ] ingresar al inicio
+                </button>
+              </div>
+              <div class="row mb-1">
+                <button
+                  onclick="btnEliminarMenor()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ b ] eliminar menor
+                </button>
+              </div>
+              <div class="row mb-1">
+                <button
+                  onclick="btnEliminarMayor()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ c ] eliminar mayor
+                </button>
+              </div>
+              <div class="row mb-1">
+                <button
+                  onclick="btnEliminarPrimerPar()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ d ] eliminar primer par
+                </button>
+              </div>
+              <div class="row mb-1">
+                <button
+                  onclick="btnEliminarPares()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ e ] eliminar pares
+                </button>
+              </div>
+              <div class="row mb-1">
+                <button
+                  onclick="btnEliminarUltimoImpar()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ f ] eliminar ultimo impar
+                </button>
+              </div>
+              <div class="row mb-1">
+                <button
+                  onclick="btnEliminarMenorPar()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ g ] eliminar menor par
+                </button>
+              </div>
+              <div class="row mb-1">
+                <button
+                  onclick="btnOrdenarAscendente()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ h ] ordenar en ascendente
+                </button>
+              </div>
+              <div class="row mb-1">
+                <button
+                  onclick="btnGenerarAleatorio()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ i ] generar aleatorio
+                </button>
+              </div>
+              <div class="row mb-1">
+                <button
+                  onclick="btnReiniciar()"
+                  class="btn btn-secondary form-control"
+                >
+                  [ j ] reiniciar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-1">
+            <div class="col-12">
+              <textarea
+                class="form-control"
+                id="txtSConsola"
+                rows="10"
+                disabled="disabled"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">Autor: alan.lucki@gmail.com</div>
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  const print = (control, cadena) =>
+    (control.value = control.value + cadena + "\n");
+  const clear = (control) => (control.value = "");
+  const set = (control, cadena) => (control.value = cadena);
+  const log = (x) => console.log(x);
+  const ran = (max, min) => Math.round(Math.random() * (max - min) + min);
+  const int = (x) => parseInt(x);
+  const flo = (x) => parseFloat(x);
+</script>
+<script>
+  const pri = (x) => print(txtS, x);
+  const getNumber = () => txtNumber.value;
+  const setRan = () => set(txtNumber, ran(1000, 9999));
+  const setNum = (x) => set(txtNumber, x);
+  const cle = () => clear(txtS);
+  const priCon = (x) => print(txtSConsola, x);
+  const cleCon = () => clear(txtSConsola);
+</script>
+<script>
+  // algortimos
+  class Nodo {
+    constructor(numero) {
+      this.numero = numero;
+      this.sig = null;
+    }
+    getNumero = () => flo(this.numero);
+  }
+
+  let ls = null;
+
+  const setEnPila = () => {
+    let n = new Nodo(getNumber());
+    n.sig = ls;
+    ls = n;
+  };
+  const setEnCola = () => {
+    let n = new Nodo(getNumber());
+    if (ls === null) ls = n;
+    else {
+      let aux = ls;
+      while (aux.sig !== null) {
+        aux = aux.sig;
+      }
+      aux.sig = n;
+    }
+  };
+  const eliminarLista = () => {
+    ls = null;
+  };
+
+  const listar = () => {
+    cle();
+    if (ls === null) pri("la lista está vacía...");
+    else {
+      let aux = ls;
+      let i = 0;
+      pri("\taux");
+      while (aux !== null) {
+        i++;
+        pri(i + ")\t" + aux.getNumero());
+        aux = aux.sig;
+      }
+    }
+  };
+
+  const extraerValor = (x) => {
+    let temp;
+    let aux = ls;
+    if (aux.numero == x) {
+      temp = aux;
+      aux = aux.sig;
+      temp.sig = null;
+      ls = aux;
+    } else {
+      while (aux.sig != null && aux.sig.numero !== x) {
+        aux = aux.sig;
+      }
+      if (aux.sig != null) {
+        temp = aux.sig;
+        aux.sig = aux.sig.sig;
+        temp.sig = null;
+      } else {
+        temp = null;
+      }
+    }
+    return temp;
+  };
+
+  const ingresarAlInicio = () => {
+    setRan();
+    setEnPila();
+    listar();
+  };
+  const obtenerMenor = () => {
+    let aux = ls;
+    let menor = aux;
+    aux = aux.sig;
+    while (aux != null) {
+      if (aux.numero < menor.numero) menor = aux;
+      aux = aux.sig;
+    }
+    return menor;
+  };
+  const obtenerMayor = () => {
+    let aux = ls;
+    let mayor = aux;
+    aux = aux.sig;
+    while (aux != null) {
+      if (aux.numero > mayor.numero) mayor = aux;
+      aux = aux.sig;
+    }
+    return mayor;
+  };
+  const eliminarMenor = () => {
+    if (ls != null) {
+      if (ls.sig == null) ls = null;
+      else {
+        extraerValor(obtenerMenor().numero);
+      }
+    }
+    listar();
+  };
+  const eliminarMayor = () => {
+    if (ls != null) {
+      if (ls.sig == null) ls = null;
+      else {
+        extraerValor(obtenerMayor().numero);
+      }
+    }
+    listar();
+  };
+  const eliminarPrimerPar = () => {
+    if (ls != null) {
+      let aux = ls;
+      while (aux != null) {
+        if (aux.numero % 2 == 0) {
+          extraerValor(aux.numero);
+          break;
+        }
+        aux = aux.sig;
+      }
+    }
+    listar();
+  };
+  const existePares = () => {
+    if (ls != null) {
+      let aux = ls;
+      while (aux != null) {
+        if (aux.numero % 2 == 0) {
+          return true;
+        }
+        aux = aux.sig;
+      }
+    }
+    return false;
+  };
+  const eliminarPares = () => {
+    if (ls != null) {
+      let aux = ls;
+      while (existePares()) {
+        eliminarPrimerPar();
+        aux = aux.sig;
+      }
+    }
+    listar();
+  };
+  const eliminarUltimoImpar = () => {
+    if (ls != null) {
+      let aux = ls;
+      let temp = null;
+      while (aux !== null) {
+        if (aux.numero % 2 != 0) temp = aux;
+        aux = aux.sig;
+      }
+      if (temp != null) extraerValor(temp.numero);
+    }
+    listar();
+  };
+  const eliminarMenorPar = () => {
+    if (ls != null) {
+      let aux = ls;
+      let mp = null;
+      while (aux !== null) {
+        if (aux.numero % 2 == 0 && (mp == null || aux.numero < mp.numero))
+          mp = aux;
+        aux = aux.sig;
+      }
+      if (mp != null) extraerValor(mp.numero);
+    }
+    listar();
+  };
+  const mayorAdelante = () => {
+    let mayor = obtenerMayor();
+    extraerValor(mayor.numero);
+    mayor.sig = ls;
+    ls = mayor;
+  };
+  const cantidadElementos = (lista) => {
+    cle();
+    if (lista === null) return 0;
+    else {
+      let aux = lista;
+      let i = 0;
+      pri("\taux");
+      while (aux !== null) {
+        i++;
+        aux = aux.sig;
+      }
+      return i;
+    }
+  };
+
+  const obtenerSubListaDesordenada = (lista, x) => {
+    let aux = lista;
+    let temp;
+    for (let i = 0; i < x; i++) {
+      aux = aux.sig;
+    }
+    temp = aux;
+    return temp;
+  };
+
+  const obtenerSubListaOrdenada = (lista, x) => {
+    if (x == 0) return null;
+    let aux = lista;
+    let i = 0 ;
+    while (aux.sig != null && i < x) {
+      aux.sig = aux.sig.sig;
+      i++;
+    }
+    aux = null;
+    return lista;
+  };
+
+  const ordenarAscendente = (lista) => {
+    if (lista != null && lista.sig != null) {
+      c = cantidadElementos(lista);
+
+      for (let i = 0; i < c; i++) {
+        log(i);
+        log("=");
+
+        let slo = obtenerSubListaOrdenada(lista, i);
+        log(slo);
+
+        //let sld = obtenerSubListaDesordenada(lista,i);
+        //log( sld )
+
+        //return
+        //let cc = 0;
+        //while (aux != null) {
+        //  cc++;
+        //log(aux.numero);
+        //log(cc);
+        //  aux = aux.sig;
+        //}
+
+        //let sld = obtenerSubListaDesordenada(i);
+        //let mayor = extraerMayorSld(sld);
+        //mayor.sig = slo;
+        //slo = mayor;
+        //slo + sld;
+      }
+    }
+    listar();
+  };
+
+  const btnIngresarAlInicio = () => {
+    ingresarAlInicio();
+  };
+  const btnEliminarMenor = () => {
+    eliminarMenor();
+  };
+  const btnEliminarMayor = () => {
+    eliminarMayor();
+  };
+  const btnEliminarPrimerPar = () => {
+    eliminarPrimerPar();
+  };
+  const btnEliminarPares = () => {
+    eliminarPares();
+  };
+  const btnEliminarUltimoImpar = () => {
+    eliminarUltimoImpar();
+  };
+  const btnEliminarMenorPar = () => {
+    eliminarMenorPar();
+  };
+  const btnOrdenarAscendente = () => {
+    ordenarAscendente(ls);
+  };
+
+  const btnGenerarAleatorio = () => {
+    setRan();
+  };
+  const btnReiniciar = () => {
+    inicio();
+  };
+
+  const inicio = () => {
+    eliminarLista();
+    setNum(1111);
+    setEnCola();
+    setNum(2222);
+    setEnCola();
+    setNum(3333);
+    setEnCola();
+    setNum(4444);
+    setEnCola();
+    setNum(5555);
+    setEnCola();
+    setNum(6666);
+    setEnCola();
+    listar();
+    cleCon();
+  };
+  inicio();
+</script>
+<script>
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      switch (event.key) {
+        case "a":
+          btnIngresarAlInicio();
+          break;
+        case "b":
+          btnEliminarMenor();
+          break;
+        case "c":
+          btnEliminarMayor();
+          break;
+        case "d":
+          btnEliminarPrimerPar();
+          break;
+        case "e":
+          btnEliminarPares();
+          break;
+        case "f":
+          btnEliminarUltimoImpar();
+          break;
+        case "g":
+          btnEliminarMenorPar();
+          break;
+        case "h":
+          btnOrdenarAscendente();
+          break;
+        case "i":
+          btnGenerarAleatorio();
+          break;
+        case "j":
+          btnReiniciar();
+          break;
+      }
+    },
+    false
+  );
+</script>
